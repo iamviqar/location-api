@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hqv.location.assembler.CountryAssembler;
 import com.hqv.location.entity.Country;
 import com.hqv.location.pojo.CountryDto;
 import com.hqv.location.repository.CountryRepository;
@@ -15,11 +16,12 @@ public class CountryService {
 
 	@Autowired
 	private CountryRepository countryRepository;
+	
+	@Autowired
+	private CountryAssembler countryAssembler;
 
 	public CountryDto saveCountry(CountryDto countryDto) {
-		Country country = new Country();
-		country.setName(countryDto.getName());
-		country.setCode(countryDto.getCode());
+		Country country = countryAssembler.assembleCountry(countryDto);
 		countryRepository.save(country);
 		countryDto.setId(country.getId());
 		return countryDto;
@@ -34,11 +36,8 @@ public class CountryService {
 	}
 
 	public CountryDto updateCountry(CountryDto countryDto, long id) {
-		Country country = new Country();
-		country.setName(countryDto.getName());
-		country.setCode(countryDto.getCode());
-		country.setId(id);
-
+		countryDto.setId(id);
+		Country country = countryAssembler.assembleCountry(countryDto);
 		countryRepository.save(country);
 		return countryDto;
 	}
