@@ -1,6 +1,7 @@
 package com.hqv.location.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,13 +12,10 @@ import com.hqv.location.repository.CountryRepository;
 
 @Service
 public class CountryService {
-	
-	
+
 	@Autowired
 	private CountryRepository countryRepository;
-	
-	
-	
+
 	public CountryDto saveCountry(CountryDto countryDto) {
 		Country country = new Country();
 		country.setName(countryDto.getName());
@@ -26,4 +24,26 @@ public class CountryService {
 		countryDto.setId(country.getId());
 		return countryDto;
 	}
+	
+	public List<Country> getList(){
+		return countryRepository.findAll();
+	}
+	
+	public Optional<Country> getCounById(long id){
+		return countryRepository.findById(id);
+	}
+	
+
+	
+	  public CountryDto updateCountry(CountryDto countryDto, long id) {		  		  
+	  Country country = new Country();	  
+	  country.setName(countryDto.getName()); 
+	  country.setCode(countryDto.getCode());	  	  
+	  country.setId(id);
+	  
+	  countryRepository.save(country); 
+	  return countryDto; 
+	  }
+	  
+	 
 }

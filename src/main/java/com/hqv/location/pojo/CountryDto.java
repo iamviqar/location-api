@@ -1,31 +1,11 @@
 package com.hqv.location.pojo;
 
+import lombok.Data;
+
+@Data
 public class CountryDto {
 	
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
+  
 	private Long id;
 	
 	private String name;
