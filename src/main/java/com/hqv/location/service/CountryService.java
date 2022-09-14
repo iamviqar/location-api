@@ -24,26 +24,23 @@ public class CountryService {
 		countryDto.setId(country.getId());
 		return countryDto;
 	}
-	
-	public List<Country> getList(){
+
+	public List<Country> getList() {
 		return countryRepository.findAll();
 	}
-	
-	public Optional<Country> getCounById(long id){
+
+	public Optional<Country> getCountryById(long id) {
 		return countryRepository.findById(id);
 	}
-	
 
-	
-	  public CountryDto updateCountry(CountryDto countryDto, long id) {		  		  
-	  Country country = new Country();	  
-	  country.setName(countryDto.getName()); 
-	  country.setCode(countryDto.getCode());	  	  
-	  country.setId(id);
-	  
-	  countryRepository.save(country); 
-	  return countryDto; 
-	  }
-	  
-	 
+	public CountryDto updateCountry(CountryDto countryDto, long id) {
+		Country country = new Country();
+		country.setName(countryDto.getName());
+		country.setCode(countryDto.getCode());
+		country.setId(id);
+
+		countryRepository.save(country);
+		return countryDto;
+	}
+
 }

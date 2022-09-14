@@ -27,7 +27,7 @@ public class CountryRestApi {
 		return countryDto;
 	}
 
-	@PutMapping("/country/update/{id}")
+	@PutMapping("/country/{id}")
 	public CountryDto updateCountry(
 
 			@RequestBody CountryDto countryDto, @PathVariable("id") long id) {
@@ -36,18 +36,14 @@ public class CountryRestApi {
 
 	}
 
-	
-	 
-	 @GetMapping("/country/list") 
-	 public List<Country> getList(){
-			return this.countryService.getList();
-		}
-	 
-	 @GetMapping("/country/{id}")
-		public Optional<Country> getCounById(
-				@PathVariable("id") long id){
-			return this.countryService.getCounById(id);
-		}
-	 
-	
+	@GetMapping("/country")
+	public List<Country> getList() {
+		return this.countryService.getList();
+	}
+
+	@GetMapping("/country/{id}")
+	public Optional<Country> getCountryById(@PathVariable("id") long id) {
+		return this.countryService.getCountryById(id);
+	}
+
 }
