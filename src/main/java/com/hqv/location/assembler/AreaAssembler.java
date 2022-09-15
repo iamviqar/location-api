@@ -19,11 +19,14 @@ public class AreaAssembler {
 	
 
 	public Area assembleArea(AreaDto areaDto) {
-		Area area = new Area();
-		area.setId(areaDto.getId());
-		area.setName(areaDto.getName());
-		area.setCode(areaDto.getCode());
-		area.setDistrict(districtAssembler.assembleDistrict(areaDto.getDistrict()));
+		Area area = null;
+		if(areaDto!=null) {
+			area = new Area();
+			area.setId(areaDto.getId());
+			area.setName(areaDto.getName());
+			area.setCode(areaDto.getCode());
+			area.setDistrict(districtAssembler.assembleDistrict(areaDto.getDistrict()));
+		}
 		return area;
 	}
 	

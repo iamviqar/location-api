@@ -3,7 +3,10 @@ package com.hqv.location.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hqv.location.assembler.CountryAssembler;
+import com.hqv.location.assembler.AreaAssembler;
+import com.hqv.location.entity.Area;
+import com.hqv.location.entity.AreaAlias;
+import com.hqv.location.pojo.AreaAliasDto;
 import com.hqv.location.pojo.AreaDto;
 import com.hqv.location.pojo.CountryDto;
 import com.hqv.location.repository.AreaAliasRepository;
@@ -14,16 +17,21 @@ public class AreaService {
 
 	@Autowired
 	private AreaRepository areaRepository;
-	
+
 	@Autowired
 	private AreaAliasRepository areaAliasRepository;
-	
-	@Autowired
-	private CountryAssembler countryAssembler;
 
-	public CountryDto saveArea(AreaDto areaDto) {
-		
-		return null;
+	@Autowired
+	private AreaAssembler areaAssembler;
+
+	public AreaDto saveArea(AreaDto areaDto) {
+		Area area = areaRepository.save(areaAssembler.assembleArea(areaDto));
+		for (AreaAliasDto areaAliasDto : areaDto.getAreaAliasList()) {
+			AreaAlias areaAlias = areaAssembler.assembleAreaAlias(areaAliasDto);
+			areaAlias.setArea(area);
+			areaAliasRepository.save(areaAlias);
+		}
+		return areaDto;
 	}
 
 	/*
