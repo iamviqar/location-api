@@ -3,14 +3,12 @@ package com.hqv.location.pojo;
 import lombok.Data;
 
 @Data
-public class DistrictDto {
-	
+public class AreaAliasDto {
+
 	private Long id;
-	
+
 	private String name;
-	
-	private String code;
-	
-	private StateDto state;
-	
+
+	private AreaDto area;
+
 }
