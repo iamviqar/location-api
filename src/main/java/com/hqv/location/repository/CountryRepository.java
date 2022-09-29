@@ -7,5 +7,7 @@ import com.hqv.location.entity.Country;
 
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Long> {
+	
+	Country findOneById(Long id);
 
 }
